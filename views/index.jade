@@ -1,0 +1,13 @@
+doctype html
+html(lang="pt-br")
+    head
+        title= pageTitle
+        
+    body
+        h1= pageTitle
+        h2= instituicoes[0].geolocation[0]
+        h2= instituicoes[0].geolocation[1]
+        ul
+            each item in instituicoes
+                li= item.geolocation[0]
+                li= item.geolocation[1]

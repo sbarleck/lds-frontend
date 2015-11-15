@@ -1,7 +1,8 @@
 var fs     = require('fs');
 var path   = require('path');
 var dir    = 'routes/';
-var define = {app: undefined, express: undefined, request: undefined};
+
+var baseHandler = {};
 
 function handlingError() {
   return function(err, files) {
@@ -13,14 +14,15 @@ function handlingError() {
 }
 
 function requiringFile(file) {
-  require('./' + dir + file)(define.app, define.express, define.request);
+  require('./' + dir + file)(baseHandler);
 }
 
-module.exports = function(application, express, request) {
+module.exports = function(application, express, request, config) {
 
-  define.app = application;
-  define.express = express;
-  define.request = request;
+  baseHandler.app     = application;
+  baseHandler.express = express;
+  baseHandler.request = request;
+  baseHandler.config  = config;
 
   fs.readdir(path.join(__dirname, dir), handlingError());
 

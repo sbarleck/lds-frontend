@@ -1,14 +1,14 @@
 var express = require('express');
-var path = require('path');
+var path    = require('path');
 var request = require('request');
-var app = express();
+var app     = express();
 
-var config = require('./app/config');
+var config  = require('./app/config');
 
 app.set('views', 'views');
 app.set('view engine', 'jade');
 
-require('./app/routes')(app, express, request);
+require('./app/routes')(app, express, request, config);
 
 app.use(express.static(path.join(__dirname, 'public')));
 

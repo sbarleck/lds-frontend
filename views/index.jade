@@ -1,15 +1,47 @@
 doctype html
 html(lang="pt-br")
     head
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title= pageTitle
+        include ./helpers/styles.jade
 
     body
-        h1= pageTitle
-        ul
-            each instituicao in instituicoes
-                each item in instituicao
-                    li= item
-                li= '==================='
+        //- h1= pageTitle
+        //- ul
+        //-     each instituicao in instituicoes
+        //-         each item in instituicao
+        //-             li= item
+        //-         li= '==================='
+
+        div(class="mdl-layout mdl-js-layout mdl-layout--fixed-header")
+            header(class="mdl-layout__header")
+                div(class="mdl-layout__header-row")
+                    <!-- Title -->
+                    span(class="mdl-layout-title")= pageTitle
+                    <!-- Add spacer, to align navigation to the right -->
+                    div(class="mdl-layout-spacer")
+                    <!-- Navigation. We hide it in small screens. -->
+                    //- nav(class="mdl-navigation mdl-layout--large-screen-only")
+                    //-     a(class="mdl-navigation__link" href="")
+                    //-         |Home
+                    //-     a(class="mdl-navigation__link" href="")
+                    //-         |Cadastrar
+                    //-     a(class="mdl-navigation__link" href="")
+                    //-         |Link
+                    //-     a(class="mdl-navigation__link" href="")
+                    //-         |Link
+            div(class="mdl-layout__drawer")
+                span(class="mdl-layout-title")= pageTitle
+                nav(class="mdl-navigation")
+                    a(class="mdl-navigation__link" href="")
+                        |Home
+                    a(class="mdl-navigation__link" href="")
+                        |Cadastrar
+            main(class="mdl-layout__content")
+                div(class="page-content")
+                    <!-- Your content goes here -->
+
+        include ./helpers/scripts.jade
 
 
 // Caso alguem mecha, importante, o webservice mudou, não é mais em java.

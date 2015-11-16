@@ -6,30 +6,12 @@ html(lang="pt-br")
         include ./helpers/styles.jade
 
     body
-        //- h1= pageTitle
-        //- ul
-        //-     each instituicao in instituicoes
-        //-         each item in instituicao
-        //-             li= item
-        //-         li= '==================='
 
         div(class="mdl-layout mdl-js-layout mdl-layout--fixed-header")
             header(class="mdl-layout__header")
                 div(class="mdl-layout__header-row")
                     <!-- Title -->
                     span(class="mdl-layout-title")= pageTitle
-                    <!-- Add spacer, to align navigation to the right -->
-                    div(class="mdl-layout-spacer")
-                    <!-- Navigation. We hide it in small screens. -->
-                    //- nav(class="mdl-navigation mdl-layout--large-screen-only")
-                    //-     a(class="mdl-navigation__link" href="")
-                    //-         |Home
-                    //-     a(class="mdl-navigation__link" href="")
-                    //-         |Cadastrar
-                    //-     a(class="mdl-navigation__link" href="")
-                    //-         |Link
-                    //-     a(class="mdl-navigation__link" href="")
-                    //-         |Link
             div(class="mdl-layout__drawer")
                 span(class="mdl-layout-title")= pageTitle
                 nav(class="mdl-navigation")
@@ -39,7 +21,12 @@ html(lang="pt-br")
                         |Cadastrar
             main(class="mdl-layout__content")
                 div(class="page-content")
-                    <!-- Your content goes here -->
+                    h1= pageTitle
+                    ul
+                        each instituicao in instituicoes
+                            each item in instituicao
+                                li= item
+                            li= '==================='
 
         include ./helpers/scripts.jade
 

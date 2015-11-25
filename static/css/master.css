@@ -8752,6 +8752,12 @@ button.close {
 .fa-fonticons:before {
   content: "\f280";
 }
+body {
+  height: 100%;
+}
+#map {
+  height: 100%;
+}
 .header {
   position: fixed;
   top: 0;

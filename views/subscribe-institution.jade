@@ -1,0 +1,62 @@
+doctype html
+html(lang="pt-br")
+    head
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title= pageTitle
+        include ./helpers/styles.jade
+
+    body
+        form
+            div(class="container form-subscribe")
+                form()
+                    div(class="form-group")
+                        div(class="input-group")
+                            div(class="input-group-addon")
+                                i(class="fa fa-hand-pointer-o")
+                            lable(for="name" class="sr-only")
+                                |Tipo
+
+                            select(class="form-control")
+                                option(value="-")
+                                    |Selecione o tipo de instituição de saúde
+                                option(value="hospital")
+                                    |Hospital
+                                option(value="posto")
+                                    |Posto de Saúde
+                                option(value="clinica")
+                                    |Clínica
+
+                    div(class="form-group")
+                        div(class="input-group")
+                            div(class="input-group-addon")
+                                i(class="fa fa-h-square")
+                            lable(for="name" class="sr-only")
+                                |Nome
+                            input(type="text" class="form-control" placeholder="Insira seu nome" required)
+
+                    div(class="form-group")
+                        div(class="input-group")
+                            div(class="input-group-addon")
+                                i(class="fa fa-hospital-o")
+                            lable(for="address" class="sr-only")
+                                |Endereço
+                            input(type="text" class="form-control" placeholder="Insira seu endereço" required)
+
+                    div(class="form-group")
+                        div(class="input-group")
+                            div(class="input-group-addon")
+                                i(class="fa fa-mobile")
+                            lable(for="phone" class="sr-only")
+                                |Telefone
+                            input(type="tel" class="form-control" placeholder="Insira seu telefone" required)
+
+                    div(class="form-group")
+                        div(class="input-group")
+                            div(class="input-group-addon")
+                                i(class="fa fa-file-text")
+                            lable(for="description" class="sr-only")
+                                |Descrição
+                            textarea(class="form-control" placeholder="Insira uma descrição" required)
+
+                    <button type="submit" class="btn btn-default pull-right">Cadastrar</button>
+

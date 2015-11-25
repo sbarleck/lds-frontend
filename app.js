@@ -10,7 +10,7 @@ app.set('view engine', 'jade');
 
 require('./app/routes')(app, express, request, config);
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'static')));
 
 var server = app.listen(config.port, function() {
     console.log(server.address());

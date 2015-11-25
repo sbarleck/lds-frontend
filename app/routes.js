@@ -21,8 +21,16 @@ baseHandler.handlingError = function(res, atributes) {
         result.pageTitle = baseHandler.config.pageTitle;
         result[atributes.key] = JSON.parse(body);
 
-        res.render(atributes.view, result);
+        res.status(200).render(atributes.view, result);
     }
+};
+
+baseHandler.handlingRender = function(res, atributes) {
+    var result = {};
+
+    result.pageTitle = baseHandler.config.pageTitle;
+
+    res.status(200).render(atributes.view, result);
 };
 
 /*

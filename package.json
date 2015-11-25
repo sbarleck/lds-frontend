@@ -10,6 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-less": "^1.1.0",
+    "grunt-contrib-watch": "^0.6.1",
     "jade": "^1.11.0",
     "request": "^2.65.0"
   }

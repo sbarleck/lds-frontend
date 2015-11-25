@@ -33,8 +33,25 @@ module.exports = function(grunt) {
         
             css: {
                 files: ['public/styles/**/*.less'],
-                tasks: ['less']
+                tasks: ['less'],
                 options: {
+                    host: '0.0.0.0',
+                    livereload: true
+                }
+            },
+
+            html: {
+                files: ['views/**/*.html'],
+                options: {
+                    host: '0.0.0.0',
+                    livereload: true
+                }
+            },
+
+            js: {
+                files: ['public/**/*.js'],
+                options: {
+                    host: '0.0.0.0',
                     livereload: true
                 }
             }

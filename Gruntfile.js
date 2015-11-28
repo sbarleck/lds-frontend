@@ -35,15 +35,15 @@ module.exports = function(grunt) {
                 files: ['public/styles/**/*.less'],
                 tasks: ['less'],
                 options: {
-                    host: '0.0.0.0',
+                    host: 'localhost',
                     livereload: true
                 }
             },
 
             html: {
-                files: ['views/**/*.html'],
+                files: ['views/**/*.jade'],
                 options: {
-                    host: '0.0.0.0',
+                    host: 'localhost',
                     livereload: true
                 }
             },
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
             js: {
                 files: ['public/**/*.js'],
                 options: {
-                    host: '0.0.0.0',
+                    host: 'localhost',
                     livereload: true
                 }
             }

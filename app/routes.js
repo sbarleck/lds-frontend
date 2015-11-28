@@ -11,7 +11,12 @@ baseHandler.handlingResponse = function(callback, atributes) {
 };
 
 baseHandler.handlingRequest = function(res, atributes) {
-    baseHandler.request(baseHandler.config.webservice + atributes.uri, baseHandler.handlingError(res, atributes));
+    baseHandler.request({
+        url: baseHandler.config.webservice + atributes.uri,
+        method: 'GET',
+        body: atributes.body || null,
+        json: true
+    }, baseHandler.handlingError(res, atributes));
 };
 
 baseHandler.handlingError = function(res, atributes) {
@@ -19,8 +24,12 @@ baseHandler.handlingError = function(res, atributes) {
         var result = {}
 
         result.pageTitle = baseHandler.config.pageTitle;
+
+        console.log(body);
 		
-        result[atributes.key] = JSON.parse(body);
+        if(body) {
+            result[atributes.key] = JSON.parse(body);
+        }
         res.status(200).render(atributes.view, result);
     }
 };
@@ -58,7 +67,9 @@ function handlingError() {
 }
 
 function requiringFile(file) {
-    require('./' + dir + file)(baseHandler);
+    if(path.extname(file) === '.js') {
+        require('./' + dir + file)(baseHandler);
+    }
 }
 
 module.exports = getFiles;

@@ -2,8 +2,8 @@ lds["map"] = (function(){
     var map;
     var initMap = errorMap;
     
-    if (geo_position_js.init()) {
-        geo_position_js.getCurrentPosition(successMap, errorMap);
+    if (navigator) {
+        navigator.geolocation.getCurrentPosition(successMap, errorMap);
     }
     else{
         errorMap();

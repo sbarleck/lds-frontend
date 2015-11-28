@@ -6,7 +6,7 @@ module.exports = function(baseHandler) {
 
     router.get('/', baseHandler.handlingResponse(baseHandler.handlingRender, {view: 'index'}));
 
-    router.get('/instituicao/proximos', baseHandler.handlingResponse(baseHandler.handlingError, {uri: '/instituicao/near', body: ['body']});
+    router.get('/instituicao/proximos', baseHandler.handlingResponse(baseHandler.handlingError, {uri: '/instituicao/near', body: ['body']}));
 
     baseHandler.app.use('/', router);
 

@@ -6,6 +6,13 @@ var baseHandler = {};
 
 baseHandler.handlingResponse = function(callback, atributes) {
     return function(req, res) {
+        if(atributes.body) {
+            var result = req;
+            atributes.body.forEach(function(param) {
+                result = result[param];
+            });
+            atributes.body = result;
+        }
         callback(res, atributes);
     }
 };
@@ -24,13 +31,17 @@ baseHandler.handlingError = function(res, atributes) {
         var result = {}
 
         result.pageTitle = baseHandler.config.pageTitle;
+        result[atributes.key] = body;
 
-        console.log(body);
-		
         if(body) {
-            result[atributes.key] = JSON.parse(body);
+//            result[atributes.key] = JSON.parse(body);
         }
-        res.status(200).render(atributes.view, result);
+        if(atributes.view) {
+            res.status(200).render(atributes.view, result);
+        }
+        else {
+            res.status(200).send(result);
+        }
     }
 };
 

@@ -9,9 +9,9 @@ lds["map"] = (function(){
         errorMap();
     }
  
-    function errorMap(loc) {
-        loc.coords.latitude = -30.058860;
-        loc.coords.longitude = -51.167885;
+    function errorMap() {
+        var loc = new Object();
+        loc.coords = {latitude: -30.058860, longitude: -51.167885};
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: loc.coords.latitude, lng: loc.coords.longitude},
             zoom: 12

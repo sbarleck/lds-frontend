@@ -2,8 +2,8 @@ lds["map"] = (function(){
     var map;
     var initMap = errorMap;
     
-    if (geo_position_js.init()) {
-        geo_position_js.getCurrentPosition(successMap, errorMap);
+    if (navigator) {
+        navigator.geolocation.getCurrentPosition(successMap, errorMap);
     }
     else{
         errorMap();
@@ -21,20 +21,18 @@ lds["map"] = (function(){
     }
 
     function successMap(loc) {
-        initMap = function(){
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: loc.coords.latitude, lng: loc.coords.longitude},
                 zoom: 12
             });
             
             getLocations(loc, createMarkers);
-        };
         
     }
     
-    function createMarkers(instituicoes) {
+    function createMarkers(data) {
         
-        instituicoes.forEach(function(instituicao) {
+        data.instituicoes.forEach(function(instituicao) {
             instituicao.mylatlong = {lat: instituicao.geolocation[0], lng: instituicao.geolocation[1]};
             instituicao.marker = new google.maps.Marker({
                 map: map,
@@ -45,11 +43,16 @@ lds["map"] = (function(){
     }
     
     function getLocations(loc, callback){
-        var localizacao = [];
-        localizacao.push(loc.coords.latitude);
-        localizacao.puch(loc.coords.longitude)
-        $.get( "instituicao/proximos", localizacao)
-            .done(callback);
+        var result = {lat: loc.coords.latitude, lng: loc.coords.longitude};
+        $.ajax({
+            url: "instituicao/proximos",
+            data: result,
+            method: "GET",
+            dataType: "json",
+            success: callback
+        });
+        //$.get( "instituicao/proximos", localizacao)
+        //    .done(callback);
     }
     
     return {

@@ -7,11 +7,7 @@ var baseHandler = {};
 baseHandler.handlingResponse = function(callback, atributes) {
     return function(req, res) {
         if(atributes.body) {
-            var result = req;
-            atributes.body.forEach(function(param) {
-                result = result[param];
-            });
-            atributes.body = result;
+            atributes.body = [req.query.lat, req.query.lng];
         }
         callback(res, atributes);
     }

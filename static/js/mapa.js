@@ -39,8 +39,20 @@ lds["map"] = (function(){
                 position: instituicao.mylatlong,
                 title: instituicao.name
             });
+            
+            var contentString = '<h2>'+ instituicao.name +'</h2>' +
+                '<p>Endereço: '+instituicao.address+'</p>'+
+                '<p>Telefone: '+instituicao.phone+'</p>';
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString,
+                maxWidth: 600
+            });
+            google.maps.event.addListener(instituicao.marker, 'click', function() {
+                infowindow.open(map,instituicao.marker);
+            });
         });
     }
+    
     
     function getLocations(loc, callback){
         var result = {lat: loc.coords.latitude, lng: loc.coords.longitude};

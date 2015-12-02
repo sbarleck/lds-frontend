@@ -1,14 +1,16 @@
 lds["map"] = (function(){
     var map;
     var initMap = errorMap;
-    
-    if (navigator) {
-        navigator.geolocation.getCurrentPosition(successMap, errorMap);
-    }
-    else{
+
+
+    function verifyGeo() {
+        if(navigator) {
+            return navigator.geolocation.getCurrentPosition(successMap, errorMap);
+        }
         errorMap();
     }
- 
+    
+    
     function errorMap(loc) {
         loc.coords.latitude = -30.058860;
         loc.coords.longitude = -51.167885;
@@ -54,6 +56,14 @@ lds["map"] = (function(){
         //$.get( "instituicao/proximos", localizacao)
         //    .done(callback);
     }
+
+    $(window).on('load', function() {
+    
+        $('.permicao').on('click', function() {
+            return Number($(this).attr('data-permicao')) ? verifyGeo() : errorMap();
+        });
+    
+    });
     
     return {
         initMap: initMap,

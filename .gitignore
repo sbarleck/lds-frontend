@@ -63,7 +63,7 @@ Session.vim
 
 
 ### Bower ###
-public/vendor
+static/vendor
 .bower-cache
 .bower-registry
 .bower-tmp

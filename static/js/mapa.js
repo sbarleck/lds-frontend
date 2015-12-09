@@ -4,6 +4,7 @@ lds["map"] = (function(){
 
     function verifyGeo() {
         if(navigator) {
+            $('#institution_subscribe').removeAttr('disabled');
             return navigator.geolocation.getCurrentPosition(successMap, errorMap);
         }
         errorMap();

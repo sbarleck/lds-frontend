@@ -6,8 +6,9 @@ var baseHandler = {};
 
 baseHandler.handlingResponse = function(callback, atributes) {
     return function(req, res) {
-        if(atributes.body && req.query.lat) {
-            atributes.body = [req.query.lat, req.query.lng];
+
+        if(atributes.body) {
+            atributes.body = {geo: [req.query.lat, req.query.lng], dist: req.query.dist};
         }
         else if(atributes.body && req.body.type) {
             atributes.method = 'POST';

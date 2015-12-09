@@ -1,6 +1,21 @@
 lds["map"] = (function(){
     var map;
     var initMap = errorMap;
+    var distancia = 7;
+    $(function() {
+        var sliderui = $( "#slider-vertical" ).slider({
+          orientation: "vertical",
+          range: "min",
+          min: 0,
+          max: 100,
+          value: 7,
+          slide: function( event, ui ) {
+            distancia = Number(($( "#amount" ).val( ui.value )).val());
+            setTimeout(verifyGeo, 1500);
+          }
+        });
+        $( "#amount" ).val( $( "#slider-vertical" ).slider( "value" ) );
+    });
 
     function verifyGeo() {
         if(navigator) {
@@ -11,8 +26,10 @@ lds["map"] = (function(){
     }
  
     function errorMap() {
+        $('.slider').css({"display": "none"});
         var loc = new Object();
         loc.coords = {latitude: -30.058860, longitude: -51.167885};
+        loc.distancia = 50;
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: loc.coords.latitude, lng: loc.coords.longitude},
             zoom: 12
@@ -22,12 +39,20 @@ lds["map"] = (function(){
     }
 
     function successMap(loc) {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: loc.coords.latitude, lng: loc.coords.longitude},
-                zoom: 16
-            });
-            
-            getLocations(loc, createMarkers);
+        $('.slider').css({"display": "inline"});
+        loc.distancia = distancia;
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: loc.coords.latitude, lng: loc.coords.longitude},
+            zoom: 12
+        });
+        var marker = new google.maps.Marker({
+                map: map,
+                position: {lat: loc.coords.latitude, lng: loc.coords.longitude},
+                title: "Usuário",
+                icon: './img/usuario.png'
+
+        });
+        getLocations(loc, createMarkers);
         
     }
     
@@ -58,7 +83,7 @@ lds["map"] = (function(){
     
     
     function getLocations(loc, callback){
-        var result = {lat: loc.coords.latitude, lng: loc.coords.longitude};
+        var result = {lat: loc.coords.latitude, lng: loc.coords.longitude, dist: loc.distancia};
         $.ajax({
             url: "instituicao/proximos",
             data: result,
@@ -71,10 +96,12 @@ lds["map"] = (function(){
     }
 
     $(window).on('load', function() {
-    
         $('.permicao').on('click', function() {
+            $('#welcome').remove();
+            
             $('#content').empty();
             $('#content').addClass('empty');
+
             return Number($(this).attr('data-permicao')) ? verifyGeo() : errorMap();
         });
     

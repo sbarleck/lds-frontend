@@ -25,9 +25,10 @@ lds["map"] = (function(){
     }
  
     function errorMap() {
+        $('.slider').css({"display": "none"});
         var loc = new Object();
         loc.coords = {latitude: -30.058860, longitude: -51.167885};
-        loc.distancia = distancia;
+        loc.distancia = 50;
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: loc.coords.latitude, lng: loc.coords.longitude},
             zoom: 12
@@ -37,7 +38,7 @@ lds["map"] = (function(){
     }
 
     function successMap(loc) {
-
+        $('.slider').css({"display": "inline"});
         loc.distancia = distancia;
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: loc.coords.latitude, lng: loc.coords.longitude},
@@ -96,7 +97,7 @@ lds["map"] = (function(){
     $(window).on('load', function() {
         $('.permicao').on('click', function() {
             $('#welcome').remove();
-            $('.slider').css({"display": "inline"});
+            
             $('#content').empty();
             $('#content').addClass('empty');
 

@@ -43,6 +43,12 @@ lds["map"] = (function(){
             center: {lat: loc.coords.latitude, lng: loc.coords.longitude},
             zoom: 12
         });
+        var marker = new google.maps.Marker({
+                map: map,
+                position: {lat: loc.coords.latitude, lng: loc.coords.longitude},
+                title: "Usuário",
+                icon: './img/usuario.png'
+            });
         
         getLocations(loc, createMarkers);
         

@@ -18,4 +18,12 @@ html(lang="pt-br")
             button(class="btn btn-primary permicao", data-permicao="0")
                 |Não permitir
 
+        div(class="slider")        
+            p(style="background: #fff; padding: 5px;")
+                label(for="amount")
+                    |Distância (km): 
+                input(type="text", id="amount", readonly, style="border:0; color:#f6931f; font-weight:bold; width: 30px")
+            div(id="slider-vertical", style="height:200px;")
+                
+                
         include ./helpers/scripts.jade

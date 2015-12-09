@@ -1,6 +1,21 @@
 lds["map"] = (function(){
     var map;
     var initMap = errorMap;
+    var distancia = 7;
+    $(function() {
+        var sliderui = $( "#slider-vertical" ).slider({
+          orientation: "vertical",
+          range: "min",
+          min: 0,
+          max: 100,
+          value: 7,
+          slide: function( event, ui ) {
+            distancia = Number(($( "#amount" ).val( ui.value )).val());
+            setTimeout(verifyGeo, 1500);
+          }
+        });
+        $( "#amount" ).val( $( "#slider-vertical" ).slider( "value" ) );
+    });
 
 
     function verifyGeo() {
@@ -13,6 +28,7 @@ lds["map"] = (function(){
     function errorMap() {
         var loc = new Object();
         loc.coords = {latitude: -30.058860, longitude: -51.167885};
+        loc.distancia = distancia;
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: loc.coords.latitude, lng: loc.coords.longitude},
             zoom: 12
@@ -22,12 +38,13 @@ lds["map"] = (function(){
     }
 
     function successMap(loc) {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: loc.coords.latitude, lng: loc.coords.longitude},
-                zoom: 12
-            });
-            
-            getLocations(loc, createMarkers);
+        loc.distancia = distancia;
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: loc.coords.latitude, lng: loc.coords.longitude},
+            zoom: 12
+        });
+        
+        getLocations(loc, createMarkers);
         
     }
     
@@ -56,7 +73,7 @@ lds["map"] = (function(){
     
     
     function getLocations(loc, callback){
-        var result = {lat: loc.coords.latitude, lng: loc.coords.longitude};
+        var result = {lat: loc.coords.latitude, lng: loc.coords.longitude, dist: loc.distancia};
         $.ajax({
             url: "instituicao/proximos",
             data: result,
@@ -69,9 +86,9 @@ lds["map"] = (function(){
     }
 
     $(window).on('load', function() {
-    
         $('.permicao').on('click', function() {
             $('#welcome').remove();
+            $('.slider').css({"display": "inline"});
             return Number($(this).attr('data-permicao')) ? verifyGeo() : errorMap();
         });
     

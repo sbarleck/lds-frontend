@@ -7,7 +7,7 @@ var baseHandler = {};
 baseHandler.handlingResponse = function(callback, atributes) {
     return function(req, res) {
         if(atributes.body) {
-            atributes.body = [req.query.lat, req.query.lng];
+            atributes.body = {geo: [req.query.lat, req.query.lng], dist: req.query.dist};
         }
         callback(res, atributes);
     }

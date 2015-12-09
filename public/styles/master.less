@@ -1,8 +1,10 @@
 @import '../../static/vendor/bootstrap/less/bootstrap.less';
 
+@brand-primary: #DC192A;
 
 body {
     height: 100%;
+    background: #374755;
 }
 #map {
     height: 100%;
@@ -21,15 +23,62 @@ body {
 .content {
     position: absolute;
     z-index: 50;
-    top: 30px;
+    top: 20%;
     left: 50%;
     width: 80%;
     margin-left: -40%;
     padding: 10px;
     background: #FFF;
-    text-align: center;
 
     .btn {
         margin: 0 10px;
+    }
+
+    &.empty {
+        padding: 0;
+    }
+}
+
+
+.header {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background: @brand-primary;
+    color: #FFF;
+
+    h1 {
+        font-size: 22px;
+    }
+}
+
+.logo-header {
+    margin: 0;
+    padding: 0;
+
+    img {
+        width: 40px;
+        height: auto;
+    }
+}
+
+
+
+.container-absolute {
+    position: absolute;
+    width: 80%;
+    top: 100px;
+    left: 50%;
+    margin-left: -40%;
+}
+
+.logo {
+    text-align: center;
+
+    img {
+        max-width: 80%;
     }
 }

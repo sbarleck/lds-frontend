@@ -1,62 +1,77 @@
-doctype html
-html(lang="pt-br")
-    head
-        meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title= pageTitle
-        include ./helpers/styles.jade
+div(class="logo")
+    img(src="images/LinhaSaude.png" alt="Linha Saúde") 
+form(name="formInstitution")
+    div(class="form-group")
+        label(for="instituicao")
+                |Informe o nome.
+        input(type="text" class="form-control" name="name" placeholder="instituição")
 
-    body
-        form
-            div(class="container form-subscribe")
-                form()
-                    div(class="form-group")
-                        div(class="input-group")
-                            div(class="input-group-addon")
-                                i(class="fa fa-hand-pointer-o")
-                            lable(for="name" class="sr-only")
-                                |Tipo
+    div(class="form-group")
+        label(for="tipo")
+            |Escolha o tipo da Instituição de Saúde. 
+        select(class="form-control" name="type" placeholder="Selecione o tipo...")
+            option
+                |Selecione o tipo...
+            option
+                |Hospital Convênio
+            option
+                |Hospital Infantil
+            option
+                |Hospital Particular
+            option
+                |Hospital Público
+            option
+                |Hospital Psiquiátrico
+            option
+                |Psiquiatra
+            option
+                |Unidade Básica de Saúde
+            option
+                |Unidade de Pronto Atendimento
+            option
+                |Clínica Gratuita
+            option
+                |Clínica Particular
+            option
+                |Clínica Convênio
+            option
+                |Clínica Geral
+            option
+                |Centro Médico
+            option
+                |Centro Médico Público
+            option
+                |Cardiologista
+            option
+                |Instituto do Câncer
+            option
+                |Otorrinolaringologista
+            option
+                |Consultor de Saúde
+            option
+                |Assistência Médica
+            option
+                |Associação ou Organização
+    
+    div(class="form-group")
+        label(for="latitude")
+            |Informe o endereço da Instituição de Saúde. 
+        input(type="text" class="form-control" name="address" id="endereco" placeholder="endereço") 
 
-                            select(class="form-control")
-                                option(value="-")
-                                    |Selecione o tipo de instituição de saúde
-                                option(value="hospital")
-                                    |Hospital
-                                option(value="posto")
-                                    |Posto de Saúde
-                                option(value="clinica")
-                                    |Clínica
+    div(class="form-group")
+        label(for="latitude")
+            |Informe o telefone da Instituição de Saúde. 
+        input(type="text" class="form-control" name="phone" id="telefone" placeholder="telefone") 
 
-                    div(class="form-group")
-                        div(class="input-group")
-                            div(class="input-group-addon")
-                                i(class="fa fa-h-square")
-                            lable(for="name" class="sr-only")
-                                |Nome
-                            input(type="text" class="form-control" placeholder="Insira seu nome" required)
+    //div(class="form-group")
+        //label(for="latitude")
+            //|Informe a coordenada de localização - latitude. 
+        //input(type="text" class="form-control" name="latitude" id="latitude" placeholder="latitude") 
 
-                    div(class="form-group")
-                        div(class="input-group")
-                            div(class="input-group-addon")
-                                i(class="fa fa-hospital-o")
-                            lable(for="address" class="sr-only")
-                                |Endereço
-                            input(type="text" class="form-control" placeholder="Insira seu endereço" required)
+    //div(class="form-group")
+        //label(for="longitude")
+            //|Informe a coordenada de localização - longitude. 
+        //input(type="text" class="form-control" name="longitude" id="longitude" placeholder="longitude") 
 
-                    div(class="form-group")
-                        div(class="input-group")
-                            div(class="input-group-addon")
-                                i(class="fa fa-mobile")
-                            lable(for="phone" class="sr-only")
-                                |Telefone
-                            input(type="tel" class="form-control" placeholder="Insira seu telefone" required)
-
-                    div(class="form-group")
-                        div(class="input-group")
-                            div(class="input-group-addon")
-                                i(class="fa fa-file-text")
-                            lable(for="description" class="sr-only")
-                                |Descrição
-                            textarea(class="form-control" placeholder="Insira uma descrição" required)
-
-                    <button type="submit" class="btn btn-default pull-right">Cadastrar</button>
-
+    button(class="btn btn-primary pull-right" type="submit" name="submit_cadinst" id="submit_cadinst")
+            |Cadastrar

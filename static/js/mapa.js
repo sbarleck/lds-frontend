@@ -17,7 +17,6 @@ lds["map"] = (function(){
         $( "#amount" ).val( $( "#slider-vertical" ).slider( "value" ) );
     });
 
-
     function verifyGeo() {
         if(navigator) {
             return navigator.geolocation.getCurrentPosition(successMap, errorMap);
@@ -38,6 +37,7 @@ lds["map"] = (function(){
     }
 
     function successMap(loc) {
+
         loc.distancia = distancia;
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: loc.coords.latitude, lng: loc.coords.longitude},
@@ -48,32 +48,34 @@ lds["map"] = (function(){
                 position: {lat: loc.coords.latitude, lng: loc.coords.longitude},
                 title: "Usuário",
                 icon: './img/usuario.png'
-            });
+
         
         getLocations(loc, createMarkers);
         
     }
     
     function createMarkers(data) {
+        data.instituicoes.forEach(marker);
+    }
+
+
+    function marker(instituicao) {
+        instituicao.mylatlong = {lat: instituicao.geolocation[0], lng: instituicao.geolocation[1]};
+        instituicao.marker = new google.maps.Marker({
+            map: map,
+            position: instituicao.mylatlong,
+            title: instituicao.name
+        });
         
-        data.instituicoes.forEach(function(instituicao) {
-            instituicao.mylatlong = {lat: instituicao.geolocation[0], lng: instituicao.geolocation[1]};
-            instituicao.marker = new google.maps.Marker({
-                map: map,
-                position: instituicao.mylatlong,
-                title: instituicao.name
-            });
-            
-            var contentString = '<h2>'+ instituicao.name +'</h2>' +
-                '<p>Endereço: '+instituicao.address+'</p>'+
-                '<p>Telefone: '+instituicao.phone+'</p>';
-            var infowindow = new google.maps.InfoWindow({
-                content: contentString,
-                maxWidth: 600
-            });
-            google.maps.event.addListener(instituicao.marker, 'click', function() {
-                infowindow.open(map,instituicao.marker);
-            });
+        var contentString = '<h2>'+ instituicao.name +'</h2>' +
+            '<p>Endereço: '+instituicao.address+'</p>'+
+            '<p>Telefone: '+instituicao.phone+'</p>';
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString,
+            maxWidth: 600
+        });
+        google.maps.event.addListener(instituicao.marker, 'click', function() {
+            infowindow.open(map,instituicao.marker);
         });
     }
     
@@ -95,9 +97,16 @@ lds["map"] = (function(){
         $('.permicao').on('click', function() {
             $('#welcome').remove();
             $('.slider').css({"display": "inline"});
+            $('#content').empty();
+            $('#content').addClass('empty');
+
             return Number($(this).attr('data-permicao')) ? verifyGeo() : errorMap();
         });
     
+    });
+
+    lds.io.on('saved_geo', function(data) {
+        marker(data);
     });
     
     return {

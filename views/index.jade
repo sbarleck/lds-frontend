@@ -6,17 +6,20 @@ html(lang="pt-br")
         include ./helpers/styles.jade
 
     body
+        include ./templates/header.jade
+
         div(class="map")
             div(id="map")
             
-        div(class="content" id="welcome")
-            h1= pageTitle
-            p
-                |Lorem molestias dolores quos odit dolorum. Numquam vel beatae ullam facere ipsum nulla tenetur repudiandae consequuntur? Vero architecto beatae fugiat saepe sit vel molestias hic eius ipsa. Voluptatem expedita eum?
-            button(class="btn btn-primary permicao", data-permicao="1")
-                |Permitir
-            button(class="btn btn-primary permicao", data-permicao="0")
-                |Não permitir
+        div(class="content" id="content")
+            div(class="text-center")
+                h1= pageTitle
+                p
+                    |Lorem molestias dolores quos odit dolorum. Numquam vel beatae ullam facere ipsum nulla tenetur repudiandae consequuntur? Vero architecto beatae fugiat saepe sit vel molestias hic eius ipsa. Voluptatem expedita eum?
+                button(class="btn btn-primary permicao", data-permicao="1")
+                    |Permitir
+                button(class="btn btn-primary permicao", data-permicao="0")
+                    |Não permitir
 
         div(class="slider")        
             p(style="background: #fff; padding: 5px;")

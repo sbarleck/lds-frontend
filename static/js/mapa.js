@@ -49,7 +49,7 @@ lds["map"] = (function(){
                 title: "Usuário",
                 icon: './img/usuario.png'
 
-        
+        });
         getLocations(loc, createMarkers);
         
     }
